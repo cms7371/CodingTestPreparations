@@ -1,27 +1,18 @@
 # 크게 만들기 https://www.acmicpc.net/problem/2812
 n, k = map(int, input().split())
-s = input()
+s = list(map(int, list(input())))
+result_len = n - k
 result = []
-i = 1
-while k != 0:
-    current = int(s[i])
-    if result:
-        last = result[-1]
-    else:
-        result.append(current)
-        i += 1
-        continue
-    if last < current:
-        result.pop()
-        k -= 1
-        continue
-    else:
-        result.append(current)
-        i += 1
-print("".join(result))
-
-
-
+for num in s:
+    while result and k:
+        if result[-1] < num:
+            result.pop()
+            k -= 1
+        else:
+            break
+    result.append(num)
+for i in range(result_len):
+    print(result[i], end="")
 
 # 왼쪽부터 작은 숫자를 모두 제거 -> 실패 반례 13925 2개
 n, k = map(int, input().split())
@@ -46,8 +37,3 @@ for c in s:
     else:
         result += c
 print(result)
-
-
-
-
-
