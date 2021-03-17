@@ -1,4 +1,11 @@
 # 1439번 뒤집기 https://www.acmicpc.net/problem/1439
+# 복습 풀이
+s = input()
+count = s.count("01") + s.count("10") + 1
+print(count // 2)
+
+
+# 첫 풀이
 s = input()
 if s[0] == '0':
     isOne = False

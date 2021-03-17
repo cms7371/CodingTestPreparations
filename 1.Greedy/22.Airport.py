@@ -1,4 +1,27 @@
 # 10755번 공항 https://www.acmicpc.net/problem/10775
+# 복습 풀이
+g = int(input())
+p = int(input())
+planes = [int(input()) for _ in range(p)]
+parents = [i for i in range(g + 1)]
+def find(a):
+    if parents[a] != a:
+        parents[a] = find(parents[a])
+    return parents[a]
+def union(a, b):
+    parents[b] = find(a)
+result = 0
+for p in planes:
+    if find(p) == 0:
+        break
+    else:
+        result += 1
+        union(find(p) - 1, find(p))
+print(result)
+
+
+
+
 # 세번째 : 서로소 집합을 이용함(참고 https://mygumi.tistory.com/245 아주 멋있는 설명)
 def find_parent(a):
     if gates[a] == a:

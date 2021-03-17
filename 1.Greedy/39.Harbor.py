@@ -1,4 +1,17 @@
 # 1092번 배 https://www.acmicpc.net/problem/1092
+
+
+
+
+
+
+
+
+
+
+
+
+
 from bisect import bisect_left, bisect_right
 # 두번째 : 그렇다면 pop 대신 disjoint set 을 이용하여 pop을 대신해보자 -> 첫번째 성공해서 안할랭
 

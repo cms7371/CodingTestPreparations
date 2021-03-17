@@ -1,4 +1,28 @@
 # 1339번 단어 수학 https://www.acmicpc.net/problem/1339
+n = int(input())
+words = [input() for _ in range(n)]
+weights = dict()
+for word in words:
+    l = len(word)
+    for i in range(l):
+        weight = pow(10, l - i - 1)
+        if word[i] in weights:
+            weights[word[i]] += weight
+        else:
+            weights[word[i]] = weight
+priority = [(weights[i], i) for i in list(weights)]
+priority.sort(reverse=True)
+alpha_to_num = dict()
+for i in range(len(priority)):
+    alpha_to_num[priority[i][1]] = 9 - i
+result = 0
+for word in words:
+    l = len(word)
+    for i in range(l):
+        result += pow(10, l - i - 1) * alpha_to_num[word[i]]
+print(result)
+
+
 # 그리디 구현 2 : 각 자리에 해당하는 가중치 부여(1의 자리면 1 10자리면 10)
 n = int(input())
 words = [input() for _ in range(n)]
@@ -13,14 +37,14 @@ for word in words:
             dic[c] = weight
 dic = [(c, dic[c]) for c in dic]
 dic.sort(key=lambda a: a[1], reverse=True)
-alpha_to_num = dict()
+weights = dict()
 for i in range(len(dic)):
-    alpha_to_num[dic[i][0]] = str(9 - i)
+    weights[dic[i][0]] = str(9 - i)
 result = 0
 buffer = ""
 for word in words:
     for c in word:
-        buffer += alpha_to_num[c]
+        buffer += weights[c]
     result += int(buffer)
     buffer = ""
 print(result)
@@ -43,14 +67,14 @@ for c in dic:
     dic[c].sort(reverse=True)
 priority_list = [dic[c] + [c] for c in dic]
 priority_list.sort(key=lambda a: a[:-1], reverse=True)
-alpha_to_num = dict()
+weights = dict()
 for i in range(len(priority_list)):
-    alpha_to_num[priority_list[i][-1]] = str(9 - i)
+    weights[priority_list[i][-1]] = str(9 - i)
 result = 0
 buffer = ""
 for word in words:
     for c in word:
-        buffer += alpha_to_num[c]
+        buffer += weights[c]
     result += int(buffer)
     buffer = ""
 print(result)

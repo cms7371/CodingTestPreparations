@@ -1,30 +1,30 @@
 # 3109번 빵집  https://www.acmicpc.net/problem/3109
-# 두번째 시도 : 깊이 우선 탐색으로 시도? 왜 이게 그리디에 있는거야
-# 다시 짜야함,..... 내일 도즈언
+# 세번째 시도 : 완전 탐색으로 거름망 같이 각 경우를 쳐내보는 것?
+
+# 두번째 시도 : 깊이 우선 탐색 -> 시간 초과.... O(C^3)의 시간 복잡도를 가지게 됨
+# 세번째 시도 -> 스택을 이용하지 않고 방문하면 모두 False로 바꿔버림 -> 어차피 안되는 경로라면 다음에 다시 접근해도
+# 안되기 때문에 중복 접근을 막아버림
 r, c = map(int, input().split())
 graph = [[True if i == "." else False for i in list(input())] for _ in range(r)]
 result = 0
+def bfs(x, y):
+    graph[x][y] = False
+    global result, stop
+    if y < c - 2:
+        if x > 0 and graph[x - 1][y + 1] and not stop:
+            bfs(x - 1, y + 1)
+        if graph[x][y + 1] and not stop:
+            bfs(x, y + 1)
+        if x < r - 1 and graph[x + 1][y + 1] and not stop:
+            bfs(x + 1, y + 1)
+    elif y == c - 2:
+        result += 1
+        stop = True
 for i in range(r):
     if graph[i][1]:
-        x = 1
-        y = i
-        caches = [(y, x)]
-        while x != c - 1:
-            if y > 0 and graph[x + 1][y - 1]:
-                x += 1
-                y -= 1
-            elif graph[x + 1][y]:
-                x += 1
-            elif y < r - 1 and graph[x + 1][y + 1]:
-                x += 1
-                y += 1
-            else:
-                break
-            caches.append((y, x))
-        if x == c - 1:
-            result += 1
-            for cache in caches:
-                graph[cache[0]][cache[1]] = False
+        stop = False
+        stack = []
+        bfs(i, 1)
 print(result)
 
 

@@ -1,4 +1,21 @@
 # 1541번 잃어버린 괄호 https://www.acmicpc.net/problem/1541
+# 2회차
+s = input()
+isPlus = True
+buffer = ""
+result = 0
+for c in s:
+    if c.isnumeric():
+        buffer += c
+    else:
+        result = result + int(buffer) if isPlus else result - int(buffer)
+        buffer = ""
+        if isPlus and c == "-":
+            isPlus = False
+result = result + int(buffer) if isPlus else result - int(buffer)
+print(result)
+
+# 1회차
 s = input()
 buffer = ""
 data = []

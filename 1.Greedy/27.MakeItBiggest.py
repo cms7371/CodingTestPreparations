@@ -1,4 +1,23 @@
 # 크게 만들기 https://www.acmicpc.net/problem/2812
+# 복습 풀이
+n, k = map(int, input().split())
+num = list(input())
+i = 0
+r = 0
+while r != k:
+    if i >= len(num) - 1:
+        i -= 1
+        num.pop()
+        r += 1
+    elif int(num[i]) < int(num[i + 1]):
+        num.pop(i)
+        i = max(0, i - 1)
+        r += 1
+    else:
+        i += 1
+print("".join(num))
+
+# 첫 풀이
 n, k = map(int, input().split())
 s = list(map(int, list(input())))
 result_len = n - k
