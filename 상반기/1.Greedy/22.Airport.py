@@ -1,5 +1,7 @@
 # 10755번 공항 https://www.acmicpc.net/problem/10775
 # 복습 풀이
+import sys
+input = sys.stdin.readline
 g = int(input())
 p = int(input())
 planes = [int(input()) for _ in range(p)]
