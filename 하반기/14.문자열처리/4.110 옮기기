@@ -1,0 +1,38 @@
+# https://programmers.co.kr/learn/courses/30/lessons/77886
+
+
+def solution(s):
+    answer = []
+    for cur in s:
+        count = 0
+        stack = []
+        for c in cur:
+            stack.append(c)
+            if len(stack) >= 3 and ''.join(stack[-3:]) == "110":
+                count += 1
+                for _ in range(3):
+                    stack.pop()
+        idx = len(stack)
+        while idx > 0:
+            if stack[idx - 1] == '1':
+                idx -= 1
+            else:
+                break
+
+        def result():
+            for i in range(len(stack) + 1):
+                if i == idx and count:
+                    yield "110" * count
+                if i < len(stack):
+                    yield stack[i]
+
+        answer.append("".join(result()))
+    return answer
+
+
+
+
+
+
+print(solution(["1110", "100111100", "0111111010"]))
+print(solution(["1100111011101001"]))
